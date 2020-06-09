@@ -1,5 +1,6 @@
 package com.revature.eval.java.core;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,12 +19,30 @@ public class EvaluationService {
 	 * Otherwise if it is positive, calculate the value of miles per hour, round it
 	 * and return it. For conversion and rounding use Math.round().
 	 */
+	
+	
+	
 	static class SpeedConverter {
 
-		public static long toMilesPerHour(double kilometersPerHour) {
-			// TODO Write an implementation for this method declaration
-			return 0;
+		static long toMilesPerHour(double kilometersPerHour) 
+		{
+			double kph= kilometersPerHour;
+			double mph;
+			if (kph <0){
+				return -1;
+			}else {
+				 mph =  (kph * .621371);
+			}
+			long mph1 =(long) mph;
+			double x = (mph - mph1);
+		if ( x>.5) {
+			mph = (long) mph+1;
+		} else {
+			mph = (long)mph;
 		}
+			return (long) Math.round(mph);
+		}
+		
 
 		/**
 		 * 1.B Speed Converter - Print Conversion
@@ -39,10 +58,30 @@ public class EvaluationService {
 		 * 
 		 * If the parameter kilometersPerHour is < 0, then print the text "Invalid
 		 * Value"
+		 * @return 
 		 */
-		public static String printConversion(double kilometersPerHour) {
-			// TODO Write an implementation for this method declaration
-			return null;
+		public static  String printConversion(double kilometersPerHour) {
+			
+			double XX= kilometersPerHour;
+			double YY = 0;
+			
+			if (XX < 0){
+				System.out.println("Invalid Entry");
+			} else {
+				 YY =  (XX * .621371);
+			}
+			long mph1 =(int) YY;
+			double x = (YY - mph1);
+		if ( x>.5) {
+			YY =  YY+1;
+		} else {
+			YY = (int)YY;
+		}
+		{
+			System.out.println(XX +"km/h " + YY+"mi/h");
+			return (XX +"km/h " + YY+"mi/h").toString();
+		}
+
 		}
 	}
 
@@ -66,9 +105,24 @@ public class EvaluationService {
 	 * If the parameter kiloBytes is less than 0 then print the text "Invalid
 	 * Value".
 	 */
-	public String printMegaBytesAndKiloBytes(int XX) {
-		// TODO Write an implementation for this method declaration
-		return null;
+	public static String printMegaBytesAndKiloBytes(int XX) {
+		double OriginalKb = XX;
+		double mb1 = OriginalKb/1000;
+		int YY = XX/1000;
+		long XX2 =(long) YY;
+		double ZZ1 = (double) ((mb1 - XX2) *1000);
+		int ZZ = (int) ZZ1;
+		if (XX < 0){
+			System.out.println("Invalid Value");
+		}else {
+			System.out.println(XX+" KB" + "  =  " + YY +"MB " + ZZ +" KB");
+		}
+		return (XX+" KB" + "  =  " + YY +"MB " + ZZ +" KB").toString();
+		}
+
+	private void If(boolean b) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	/**
@@ -91,9 +145,31 @@ public class EvaluationService {
 	 * If the hourOfDay parameter is less than 0 or greater than 23, return false.
 	 */
 	public boolean shouldWakeUp(boolean isBarking, int hourOfDay) {
-		// TODO Write an implementation for this method declaration
-		return false;
-	}
+		//class BARKING_DOG {
+			boolean bd =isBarking;
+			int hod=hourOfDay;
+			
+		
+					
+					if (bd == false) {
+					System.out.println("False");
+					return false;
+					
+					} else if(  bd==true && (hod  >=8 && 22<hod) || bd ==true && (hod < 0 && 23<hod )) {
+						
+						System.out.println("False");
+						return false;
+						
+					}
+					
+					 else {
+						 System.out.println("True");
+						return true;
+					}
+			
+			}
+		
+	//}
 
 	/**
 	 * 4. DecimalComparator
@@ -107,8 +183,20 @@ public class EvaluationService {
 	 * Otherwise, return false;
 	 */
 	public boolean areEqualByThreeDecimalPlaces(double firstNum, double secondNum) {
-		// TODO Write an implementation for this method declaration
+		double fn = Math.floor(firstNum*1000);
+		fn = fn/1000;
+		System.out.println(fn);
+		double sn = Math.floor(secondNum*1000);
+		sn = sn/1000;
+		System.out.println(sn);
+		if (fn == sn) {
+			
+			System.out.println("true");
+			return true;
+		}else {
+			System.out.println("false");
 		return false;
+		}
 	}
 
 	/**
@@ -122,41 +210,67 @@ public class EvaluationService {
 	 * false.
 	 */
 	static class TeenNumberChecker {
-
+		
 		public static boolean hasTeen(int x, int y, int z) {
-			// TODO Write an implementation for this method declaration
-			return false;
+				
+			return isTeen(x) || isTeen(y) || isTeen(z);
+		
 		}
-
 		// We can initialize isTeen method first
 		// Then pass the parameter to hasTeen method
 
-		public static boolean isTeen(int number) {
-			// TODO Write an implementation for this method declaration
-			return false;
-		}
-	}
-
+		 public static boolean isTeen(int number) {
+			
+			int i =number;
+					
+					if (i>=13 && i<= 19){
+					System.out.println(i);
+					return true; 
+					
+					} else {
+					System.out.println("False");
+				   return false;
+					}	
+					
+		 }		
+	}		
+	
 	/**
 	 * 6. Minutes To Years and Days Calculator
 	 * 
 	 * Write a method printYearsAndDays with parameter of type long named minutes.
-	 * The method should not return anything (void) and it needs to calculate the
+	 * The method should return a string and it needs to calculate the
 	 * years and days from the minutes parameter.
 	 * 
-	 * If the parameter is less than 0, print text "Invalid Value".
+	 * If the parameter is less than 0, return text "Invalid Value".
 	 * 
-	 * Otherwise, if the parameter is valid then it needs to print a message in the
+	 * Otherwise, if the parameter is valid then it needs to return a message in the
 	 * format "XX min = YY y and ZZ d".
 	 * 
 	 * XX represents the original value minutes. YY represents the calculated years.
 	 * ZZ represents the calculated days.
 	 */
-	public String printYearsAndDays(long minutes) {
-		// TODO Write an implementation for this method declaration
-		return null;
-	}
-
+		 public String printYearsAndDays(long minutes) {
+				
+				Integer XX = (int)minutes;
+				Integer YY1= (int)(minutes/525600);
+				Integer ZZ1 = ((XX%525600)/1440);
+				
+				if (XX>=0) {
+		         
+				String YY = Integer.toString(YY1);
+				String ZZ = Integer.toString(ZZ1);
+				
+				System.out.println(XX + " min" + " = " + YY +" y " + "and "+  ZZ +" d");
+				return (XX + " min" + " = " + YY +" y " + "and "+  ZZ +" d");
+				}else {
+					
+					System.out.println("Invalid Value");
+					
+				}
+				return "Invalid Value".toString();
+			}
+	
 	/**
 	 * 7. Number In Word
 	 * 
@@ -166,10 +280,64 @@ public class EvaluationService {
 	 * for any other number including negative numbers. You can use if-else
 	 * statement or switch statement whatever is easier for you.
 	 */
-	public String printNumberInWord(int number) {
-		// TODO Write an implementation for this method declaration
-		return null;
+	public   String printNumberInWord(int number) {
+		
+		int num1 =number;
+	
+		
+			switch(num1) {
+		case 0:
+			System.out.println("test");
+			return ("ZERO").toString();
+			
+			
+		case 1:
+			System.out.println("test");
+			 return("ONE").toString();
+			 
+			
+			
+		case 2:
+			System.out.println("test");
+			return("TWO").toString();
+			
+			
+		case 3:
+			System.out.println("test");
+			return ("THREE").toString();
+			
+			
+		case 4:
+			System.out.println("test");
+			return ("FOUR").toString();
+		
+		case 5:
+			System.out.println("test");
+			return ("FIVE").toString();
+		
+			
+		case 6:
+			return ("SIX").toString();
+			
+			
+		case 7:
+			return ("SEVEN").toString();
+		
+		
+		case 8:
+			return ("EIGHT").toString();
+			
+		case 9:
+			return ("NINE").toString();
+			
+
+		default:
+			System.out.println("test");
+			return("OTHER").toString();
+			}
 	}
+	
+
 
 	/**
 	 * 8. Greatest Common Divisor
@@ -191,9 +359,18 @@ public class EvaluationService {
 	 * and there is no resulting remainder.
 	 */
 	public int getGreatestCommonDivisor(int first, int second) {
-		// TODO Write an implementation for this method declaration
-		return 0;
-	}
+		int gcd =1;
+		
+		for(int d = 1; d <=first && d <=second; d++)
+        {
+            if (first%d==0 && second%d==0)
+                gcd = d;
+        }
+	
+		return  gcd;
+}
+
+	
 
 	/**
 	 * 9. First and Last Digit Sum
@@ -220,8 +397,13 @@ public class EvaluationService {
 	 * reverses a String. Example: reverse("example"); -> "elpmaxe"
 	 */
 	public String reverse(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String bws ="";
+		
+		for(int l = string.length()-1; l>=0; l--)
+		bws =bws +string.charAt(l);
+		System.out.println(bws);
+		return bws;
+	
 	}
 
 	/**
@@ -232,8 +414,26 @@ public class EvaluationService {
 	 * long name like Portable Network Graphics to its acronym (PNG).
 	 */
 	public String acronym(String phrase) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		 
+		String acro3 =" ";
+		
+		boolean emptySpace = true;
+		
+		for(int letter = 0; letter < phrase.length(); letter++) {
+			
+			if(phrase.charAt(letter) == ' ') {
+				
+				emptySpace = true;
+			}else if (phrase.charAt(letter) != ' ' && emptySpace == true) {
+				
+				acro3 += (phrase.charAt(letter));
+				emptySpace=false;
+			}
+				
+		}
+			
+		return acro3;
+	
 	}
 
 	/**
@@ -288,18 +488,18 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if(sideOne == sideTwo && sideOne==sideThree);
+			return true;
 		}
 
 		public boolean isIsosceles() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if(sideOne == sideTwo || sideOne==sideThree);
+			return true;
 		}
 
 		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if(sideOne != sideTwo &&sideOne!=sideThree &&sideTwo != sideThree);
+			return true;
 		}
 
 	}
@@ -318,9 +518,61 @@ public class EvaluationService {
 	 * 
 	 * 3 + 2*1 + 2*3 + 2 + 1 = 3 + 2 + 6 + 3 = 5 + 9 = 14
 	 */
-	public int getScrabbleScore(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+	 public int getScrabbleScore(String string) {
+		 String x = string.toUpperCase();
+		
+	
+		int letterValue = 0;
+	
+		
+		for (int lv = x.length()-1; lv>=0; lv-- ) {
+			switch(x.charAt(lv)) {
+			case 'A': letterValue = (letterValue +1);break;
+			case 'E': letterValue = (letterValue +1);break;
+			case 'I':letterValue = (letterValue +1); break;
+			case 'O':letterValue = (letterValue +1); break;
+			case 'U':letterValue = (letterValue +1); break;
+			case 'L':letterValue = (letterValue +1); break;
+			case 'N':letterValue = (letterValue +1); break;
+			case 'R':letterValue = (letterValue +1); break;
+			case 'S':letterValue = (letterValue +1); break;
+			case 'T':letterValue = (letterValue +1); break;
+				
+			
+			case 'D':letterValue = (letterValue +2); break;
+			case 'G':letterValue = (letterValue +2); break;
+				
+				
+			case 'B':letterValue = (letterValue +3); break;
+			case 'C':letterValue = (letterValue +3); break;
+			case 'M':letterValue = (letterValue +3); break;
+			case 'P':letterValue = (letterValue +3); break;
+				
+				
+			case 'F':letterValue = (letterValue +4); break;
+			case 'H':letterValue = (letterValue +4); break;
+			case 'V':letterValue = (letterValue +4); break;
+			case 'W':letterValue = (letterValue +4); break;
+			case 'Y':letterValue = (letterValue +4); break;
+				
+				
+			case 'K':letterValue = (letterValue +5); break;
+				
+				
+			case 'J':letterValue = (letterValue +8); break;
+			case 'X':letterValue = (letterValue +8); break;
+				
+				
+			case 'Q':letterValue = (letterValue +10); break;
+			case 'Z':letterValue = (letterValue +10); break;
+				
+			
+			}
+			
+		
+			
+		}
+		return letterValue;
 	}
 
 	/**
@@ -357,8 +609,44 @@ public class EvaluationService {
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 	public String cleanPhoneNumber(String string) {
-		return null;
-	}
+		char c = ' ';
+		int pos =0;
+		
+		char [] step1 = string.toCharArray();
+		// if (step1[0] >1 ) {
+			  // System.out.println(step1[0]);
+			// return "Invalid Entry";
+		// }else {
+			 for(char cN : step1) {
+			if (Character.isLetter(cN)) {
+				System.out.println("IllegalArgumentException");
+				return "IllegalArgumentException";
+			}
+		}
+		   
+		 if (step1[0] ==1) {
+		
+		step1[pos] = c;
+		string = String.valueOf(step1);
+		String step2 = step1.toString();
+		
+		String	cleanNumber  = step2.replaceAll("[^0-9]", "");
+		System.out.println(step2);
+		if(step2.length() > 11) {
+			System.out.println("IllegalArgumentException");
+		}else {
+		{
+		System.out.println( cleanNumber);
+		return cleanNumber;
+		}
+		 }
+	 }
+		
+	String	cleanNumber  = string.replaceAll("[^0-9]", "");
+	System.out.println( cleanNumber);
+	return cleanNumber;}
+		
+	
 
 	/**
 	 * 15. Recurring Word Counter
